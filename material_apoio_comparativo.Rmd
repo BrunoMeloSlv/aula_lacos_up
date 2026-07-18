@@ -1,0 +1,187 @@
+---
+title: "Material de Apoio --- Laços de Repetição em C, Python e R"
+author: "Prof. Bruno Melo · Universidade Positivo --- Processo Seletivo Docente"
+date: "Conteúdo complementar (fora dos 20 min) · guia de consulta"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    highlight: tango
+    latex_engine: pdflatex
+fontsize: 11pt
+geometry: margin=2.4cm
+lang: pt-BR
+header-includes:
+  - \usepackage{xcolor}
+  - \definecolor{upescuro}{HTML}{050A59}
+  - \definecolor{upazul}{HTML}{032059}
+  - \definecolor{upmedio}{HTML}{074073}
+  - \definecolor{upclaro}{HTML}{2E608C}
+  - \usepackage{titlesec}
+  - \titleformat{\section}{\color{upescuro}\Large\bfseries}{\thesection}{0.6em}{}
+  - \titleformat{\subsection}{\color{upazul}\large\bfseries}{\thesubsection}{0.6em}{}
+  - \usepackage{graphicx}
+  - \usepackage{titling}
+  - \pretitle{\begin{center}\includegraphics[width=3.4cm]{up_logo.png}\\[0.8em]\LARGE\color{upescuro}\bfseries}
+  - \posttitle{\par\end{center}\vskip 0.4em}
+  - \preauthor{\begin{center}\large\color{upazul}}
+  - \postauthor{\par\end{center}}
+  - \predate{\begin{center}\color{upmedio}}
+  - \postdate{\par\end{center}}
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyhf{}
+  - \fancyhead[L]{\small\color{upescuro}\textbf{Material de Apoio} · Laços de Repetição · UP}
+  - \fancyhead[R]{\small\thepage}
+  - \renewcommand{\headrulewidth}{0.4pt}
+  - \usepackage[most]{tcolorbox}
+  - \newtcolorbox{destaque}{colback=upclaro!8,colframe=upmedio,boxrule=0.6pt,arc=2pt,left=6pt,right=6pt,top=5pt,bottom=5pt}
+  - \newtcolorbox{ouro}{colback=upescuro!6,colframe=upescuro,boxrule=0.7pt,arc=2pt,left=6pt,right=6pt,top=5pt,bottom=5pt}
+  - \newtcolorbox{pergunta}{colback=upazul!7,colframe=upazul,boxrule=0.8pt,arc=2pt,left=6pt,right=6pt,top=5pt,bottom=5pt}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+\begin{ouro}
+\textbf{A ideia central:} a estrutura lógica de um laço --- inicializar, testar, executar, atualizar --- é \textbf{a mesma} em C, Python e R. Muda a \emph{sintaxe} e o que cada comunidade considera idiomático. Compreender o conceito em C facilita a transferência para as outras linguagens.
+\end{ouro}
+
+# O que é uma estrutura de repetição
+
+Uma **estrutura de repetição** (laço, *loop*) executa um bloco de comandos várias
+vezes enquanto uma condição se mantém verdadeira ou enquanto um contador percorre
+um intervalo (DEITEL; DEITEL, 2011). Distinguimos dois casos:
+
+- **Repetição contada** --- o número de iterações é **conhecido** de antemão (naturalmente expressa por `for`).
+- **Repetição condicionada** --- o número de iterações **depende de uma condição** avaliada em tempo de execução (naturalmente expressa por `while`/`do-while`) (ASCENCIO; CAMPOS, 2012).
+
+Todo laço tem quatro elementos: **inicialização**, **condição de parada**,
+**corpo** e **atualização** da variável de controle. A omissão da atualização da
+variável testada é a causa clássica do **laço infinito** (DEITEL; DEITEL, 2011).
+
+# O exemplo condutor: simulador de poupança
+
+**Problema:** o usuário guarda um valor fixo por mês. Quantos meses até atingir
+uma meta (ex.: comprar um notebook)? E quanto terá em exatamente 12 meses?
+
+## Em C (KERNIGHAN; RITCHIE, 1989)
+
+```c
+/* Contada: 12 meses fixos */
+float total = 0.0f;
+for (int mes = 1; mes <= 12; mes++) {
+    total += mensal;
+    printf("Mes %d: R$ %.2f\n", mes, total);
+}
+
+/* Condicionada: ate a meta */
+float t = 0.0f; int meses = 0;
+while (t < meta) {
+    t += mensal;
+    meses++;
+}
+```
+
+## Em Python (DOWNEY, 2016)
+
+```python
+# Contada: iterar sobre um intervalo (idiomatico em Python)
+total = 0.0
+for mes in range(1, 13):          # 1..12
+    total += mensal
+    print(f"Mes {mes}: R$ {total:.2f}")
+
+# Condicionada
+t, meses = 0.0, 0
+while t < meta:
+    t += mensal
+    meses += 1
+```
+
+\begin{destaque}
+Em Python, o \texttt{for} percorre os elementos de uma sequência (aqui, \texttt{range}) e não um contador manual: iterar sobre coleções é o estilo idiomático (DOWNEY, 2016). Não existe \texttt{do-while}; emula-se com \texttt{while True:} + \texttt{break}.
+\end{destaque}
+
+## Em R (WICKHAM; GROLEMUND, 2017)
+
+```r
+# Contada
+total <- 0
+for (mes in 1:12) {
+  total <- total + mensal
+  cat(sprintf("Mes %d: R$ %.2f\n", mes, total))
+}
+
+# Condicionada
+t <- 0; meses <- 0
+while (t < meta) {
+  t <- t + mensal
+  meses <- meses + 1
+}
+
+# Estilo idiomatico em R: vetorizacao (evita o laco explicito)
+total_12 <- sum(rep(mensal, 12))
+```
+
+\begin{destaque}
+Em R, laços explícitos funcionam, mas o estilo idiomático prefere \textbf{vetorização} e funções de iteração funcional (ex.: \texttt{purrr::map}), reservando o \texttt{for} para efeitos colaterais (WICKHAM; GROLEMUND, 2017, cap. \emph{Iteration}).
+\end{destaque}
+
+# Quadro comparativo
+
+| Aspecto | C | Python | R |
+|---|---|---|---|
+| `for` contado | `for(int m=1;m<=12;m++)` | `for m in range(1,13):` | `for (m in 1:12)` |
+| `while` | `while(cond){}` | `while cond:` | `while (cond) {}` |
+| `do-while` | `do{}while(cond);` | não existe | não existe |
+| Bloco | chaves `{ }` | indentação após `:` | chaves `{ }` |
+| Controle | tipada, declarada | nome dinâmico | nome dinâmico |
+| Idiomático | contador explícito | iterar coleções | vetorização / `map` |
+
+**Conclusão didática:** a estrutura lógica (inicializar, testar, executar,
+atualizar) é a mesma nas três linguagens; muda a sintaxe e o que cada comunidade
+considera idiomático.
+
+# Erros comuns (para a depuração ao vivo)
+
+1. **Laço infinito** --- a variável testada na condição não é atualizada no corpo. *Ex.:* esquecer `total += mensal;` no `while`; `total` fica 0 e a condição nunca fica falsa (DEITEL; DEITEL, 2011).
+2. **Off-by-one** --- erro de contagem por um: usar `mes < 12` quando se quer 12 iterações (executa 11), ou iniciar o contador em 0 quando se esperava 1.
+3. **Ponto-e-vírgula indevido** --- `for (...);` com `;` logo após o cabeçalho cria um corpo vazio (armadilha sintática em C).
+
+# Pergunta de verificação de aprendizagem
+
+\begin{pergunta}
+\textbf{No simulador de poupança, quero garantir que o menu apareça pelo menos uma vez e só depois perguntar se o usuário deseja continuar. Qual das três estruturas --- \texttt{for}, \texttt{while} ou \texttt{do-while} --- é a mais adequada, e por quê?}
+\end{pergunta}
+
+**Resposta esperada:** `do-while`. Como a condição é avaliada **ao final** do
+laço, o corpo (o menu) executa **pelo menos uma vez** antes da primeira
+verificação --- comportamento exigido pelo requisito (DEITEL; DEITEL, 2011).
+
+*Questão-desafio (opcional para a banca):* "Como obter esse comportamento em
+Python, que não possui `do-while`?" Resposta: `while True:` com um `break`
+condicional ao final (DOWNEY, 2016).
+
+# Referências
+
+ASCENCIO, A. F. G.; CAMPOS, E. A. V. **Fundamentos da programação de
+computadores**: algoritmos, Pascal, C/C++ (padrão ANSI) e Java. 3. ed. São
+Paulo: Pearson, 2012.
+
+DEITEL, P.; DEITEL, H. **C: como programar**. 6. ed. São Paulo: Pearson Prentice
+Hall, 2011.
+
+DOWNEY, A. B. **Pense em Python**: pense como um cientista da computação. 2. ed.
+São Paulo: Novatec, 2016.
+
+KERNIGHAN, B. W.; RITCHIE, D. M. **C: a linguagem de programação**: padrão ANSI.
+Rio de Janeiro: Campus, 1989.
+
+MASETTO, M. T. **Competência pedagógica do professor universitário**. 2. ed. São
+Paulo: Summus, 2012.
+
+WICKHAM, H.; GROLEMUND, G. **R for data science**: import, tidy, transform,
+visualize, and model data. Sebastopol: O'Reilly Media, 2017.

@@ -1,0 +1,150 @@
+---
+title: "Instruções do Quadro --- O que desenhar à mão"
+author: "Prof. Bruno Melo · Universidade Positivo --- Processo Seletivo Docente"
+date: "Laços de Repetição em C · ponto de pausa planejado (~3 min)"
+output:
+  pdf_document:
+    toc: false
+    number_sections: true
+    highlight: tango
+    latex_engine: pdflatex
+fontsize: 11pt
+geometry: margin=2.4cm
+lang: pt-BR
+header-includes:
+  - \usepackage{xcolor}
+  - \definecolor{upescuro}{HTML}{050A59}
+  - \definecolor{upazul}{HTML}{032059}
+  - \definecolor{upmedio}{HTML}{074073}
+  - \definecolor{upclaro}{HTML}{2E608C}
+  - \usepackage{titlesec}
+  - \titleformat{\section}{\color{upescuro}\Large\bfseries}{\thesection}{0.6em}{}
+  - \titleformat{\subsection}{\color{upazul}\large\bfseries}{\thesubsection}{0.6em}{}
+  - \usepackage{graphicx}
+  - \usepackage{titling}
+  - \pretitle{\begin{center}\includegraphics[width=3.4cm]{up_logo.png}\\[0.8em]\LARGE\color{upescuro}\bfseries}
+  - \posttitle{\par\end{center}\vskip 0.4em}
+  - \preauthor{\begin{center}\large\color{upazul}}
+  - \postauthor{\par\end{center}}
+  - \predate{\begin{center}\color{upmedio}}
+  - \postdate{\par\end{center}}
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyhf{}
+  - \fancyhead[L]{\small\color{upescuro}\textbf{Instruções do Quadro} · Laços de Repetição em C · UP}
+  - \fancyhead[R]{\small\thepage}
+  - \renewcommand{\headrulewidth}{0.4pt}
+  - \usepackage[most]{tcolorbox}
+  - \newtcolorbox{destaque}{colback=upclaro!8,colframe=upmedio,boxrule=0.6pt,arc=2pt,left=6pt,right=6pt,top=5pt,bottom=5pt}
+  - \newtcolorbox{fala}{colback=black!3,colframe=black!25,boxrule=0.4pt,arc=1pt,left=6pt,right=6pt,top=4pt,bottom=4pt}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+\begin{destaque}
+\textbf{Momento:} logo após o slide 14 (ordem de execução do \texttt{for}). O slide 15 ("AO QUADRO") fica projetado enquanto você desenha. \textbf{Meta do desenho:} mostrar \emph{onde a condição é testada} em cada laço --- em cima (\texttt{while}/\texttt{for}) x embaixo (\texttt{do-while}) --- e a seta de retorno que caracteriza a repetição.
+\end{destaque}
+
+**Organização.** Divida o quadro em **3 colunas**, desenhando da esquerda para a
+direita e falando enquanto desenha. Use **uma cor** para o fluxo e **outra** para
+circular as diferenças no fim. Convenções: **losango** = decisão (condição);
+**retângulo** = processo (corpo); **seta** = fluxo.
+
+# Coluna 1 --- `while` (condição em cima) ~60 s
+
+```text
+          (inicio)
+             |
+             v
+        /-----------\
+       <  total<meta? >----( Falso )---->  ( fim )
+        \-----------/
+             |
+         (Verdadeiro)
+             |
+             v
+     +------------------+
+     |  total += mensal |
+     |  meses++         |
+     |  mostrar total   |
+     +------------------+
+             |
+             +----------------+
+             |  (volta ao teste)
+             ^----------------+
+```
+
+\begin{fala}
+\textbf{Fala:} "O losango é o \emph{porteiro}: testa \textbf{antes} de entrar. Se verdadeiro, executa o corpo e \textbf{volta} para testar de novo. Quando fica falso, sai. A seta de retorno é o que faz repetir."
+\end{fala}
+
+# Coluna 2 --- `for` (mesmo fluxo, com contador) ~60 s
+
+Reaproveite o desenho da coluna 1 e **acrescente** os dois blocos do contador:
+
+```text
+     [ mes = 1 ]   <-- INICIALIZACAO (uma vez, ANTES do teste)
+             |
+             v
+        /-----------\
+       <  mes <= 12?  >----( Falso )---->  ( fim )
+        \-----------/
+             |
+         (Verdadeiro)
+             |
+             v
+     +------------------+
+     |  total += mensal |
+     |  mostrar total   |
+     +------------------+
+             |
+             v
+        [ mes++ ]     <-- INCREMENTO (ao FIM de cada volta)
+             |
+             +--------> (volta ao teste)
+```
+
+\begin{fala}
+\textbf{Fala:} "É o \textbf{mesmo fluxo} do while. O for só \emph{arruma as peças}: a inicializacao fica antes do teste, e o incremento, depois do corpo. Por isso o for é ideal quando o número de voltas é \textbf{conhecido}."
+\end{fala}
+
+**Gesto de ligação com o slide:** aponte para o losango e diga "isto é a **2**
+que acendeu no slide"; para `mes=1`, "a **1**"; para `mes++`, "a **4**".
+
+# Coluna 3 --- `do-while` (condição embaixo) ~40 s
+
+```text
+          (inicio)
+             |
+             v            <-- entra DIRETO no corpo
+     +------------------+
+     |  total += mensal |
+     |  meses++         |
+     |  mostrar total   |
+     +------------------+
+             |
+             v
+        /-----------\
+       <  total<meta? >---( Verdadeiro )--+
+        \-----------/                     |
+             |                            |
+          (Falso)      (volta ao corpo)---+
+             |
+             v
+          ( fim )
+```
+
+\begin{fala}
+\textbf{Fala:} "Aqui o losango está \textbf{embaixo}. A seta de início cai \textbf{direto no corpo}, então ele executa \textbf{pelo menos uma vez}, mesmo que a condição já seja falsa. Perfeito para um \emph{menu} que precisa aparecer antes de perguntar 'deseja continuar?'."
+\end{fala}
+
+# Fechamento no quadro ~20 s
+
+- Circule/sublinhe: **losango EM CIMA** nas colunas 1 e 2; **losango EMBAIXO** na coluna 3.
+- Escreva ao lado: **`while`/`for` podem rodar 0 vez** · **`do-while` roda ao menos 1 vez**.
+
+\begin{destaque}
+\textbf{Retomada da apresentação:} guarde o giz, vire-se para a banca e diga --- "Agora que vimos o fluxo no quadro, vamos ver essas três formas escritas em C." \textbf{Avance o slide} (15 para 16). O quadro-resumo do slide 18 espelha de propósito o que você acabou de desenhar --- use essa simetria como reforço (MASETTO, 2012).
+\end{destaque}
