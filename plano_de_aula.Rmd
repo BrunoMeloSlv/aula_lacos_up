@@ -70,7 +70,7 @@ repetição condicionada.
 
 O estudante será capaz de:
 
-1. **(Lembrar)** *Identificar* as partes de um laço em Python --- o intervalo, a variável de controle e o corpo indentado no `for`; a condição, o corpo e a atualização no `while`.
+1. **(Lembrar)** *Identificar* as partes de um laço em Python, o intervalo, a variável de controle e o corpo indentado no `for`; a condição, o corpo e a atualização no `while`.
 2. **(Compreender)** *Descrever* o fluxo de execução do `for` (percorre um intervalo) e do `while` (testa uma condição no início), explicando quando cada laço termina.
 3. **(Aplicar)** *Implementar* um simulador de poupança em Python que acumula um valor mensal até atingir uma meta financeira.
 4. **(Analisar)** *Distinguir* repetição **contada** (`for`) de repetição **condicionada** (`while`), selecionando a estrutura adequada a cada problema.
@@ -84,7 +84,7 @@ A formulação por níveis crescentes de complexidade cognitiva segue a progress
 
 1. Motivação: automação de tarefas repetitivas (simulador de poupança).
 2. Da lógica à sintaxe: pseudocódigo do processo iterativo.
-3. Estrutura `for`: percorrer um intervalo (`range`) --- intervalo, variável de controle e corpo indentado.
+3. Estrutura `for`: percorrer um intervalo (`range`) intervalo, variável de controle e corpo indentado.
 4. Estrutura `while`: repetição condicionada, teste no início.
 5. O padrão `while True:` + `break`: garantir a execução ao menos uma vez (equivalente idiomático ao `do-while`, inexistente em Python).
 6. Comparação entre `for` e `while`: repetição contada x condicionada.
@@ -118,7 +118,7 @@ ensino superior (MASETTO, 2012):
 Avaliação **formativa**, ao longo da aula, por observação e questionamento
 dirigido (MASETTO, 2012):
 
-- **Durante o live coding:** pergunta diagnóstica --- *"o que falta dentro do laço para ele parar?"* --- verificando a compreensão da causa do laço infinito.
+- **Durante o live coding:** pergunta diagnóstica *"o que falta dentro do laço para ele parar?"* verificando a compreensão da causa do laço infinito.
 - **Indicadores de aprendizagem:** o estudante identifica as partes do laço, justifica a escolha da estrutura e explica a origem de um laço infinito.
 
 # Referências

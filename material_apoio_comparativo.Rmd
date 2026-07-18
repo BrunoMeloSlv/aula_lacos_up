@@ -163,7 +163,7 @@ considera idiomático. Dominar o conceito em Python facilita a leitura de C e R.
 \end{pergunta}
 
 **Resposta esperada:** usar `while True:` com um `break` **no fim** do corpo.
-Assim o corpo (o menu) executa **pelo menos uma vez** antes do primeiro teste ---
+Assim o corpo (o menu) executa **pelo menos uma vez** antes do primeiro teste
 o padrão idiomático que substitui o `do-while`, inexistente em Python (DOWNEY,
 2016).
 

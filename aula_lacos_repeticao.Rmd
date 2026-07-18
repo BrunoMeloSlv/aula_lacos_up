@@ -97,7 +97,7 @@ strong { color: #050A59; }
 /* --- Logo no canto dos slides de conteúdo (fundo claro) --- */
 .remark-slide-content:not(.inverse):not(.title-slide-light)::after {
   content: ""; position: absolute; top: 46px; right: 28px;
-  width: 112px; height: 32px;
+  width: 190px; height: 80px;
   background: url("up_logo.png") right center / contain no-repeat;
   opacity: 0.9;
 }
@@ -216,7 +216,7 @@ hr { border: none; border-top: 2px solid #074073; margin: 0.5em 0; }
 
 3. **O `for` passo a passo**
 
-4. .azulmedio[**Quadro**] — desenhar o fluxo
+4. .azulmedio[**Desenhar o fluxo**]
 
 
 <br>
@@ -374,6 +374,20 @@ class: inverse, middle, center
 .ref[Em Python, o `for` itera sobre os elementos de uma sequência, como um `range` (DOWNEY, 2016).]
 
 ---
+
+class: inverse, middle, center
+.header[ &nbsp; &nbsp; &nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &nbsp; &nbsp; &nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+
+
+## *Vamos desenhar o fluxo do laço à mão.*
+
+Comparando lado a lado:
+
+- **`for`** —> percorre um intervalo (contagem embutida)
+- **`while`** —> testa **antes** de cada volta
+- **`while True` + `break`** —> testa **no fim** (roda ≥ 1 vez)
+
+---
 .header[ &nbsp; &nbsp; &nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &nbsp; &nbsp; &nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 ## Anatomia do `for` — visão geral
@@ -405,7 +419,7 @@ for mes in range(1, 13):      # <-- range define QUANTAS voltas  #<<
     print(f"Mes {mes}: R$ {total:.2f}")
 ```
 
-.passo[O intervalo] — `range(1, 13)` gera os valores **1 a 12** (o 13 fica de
+.passo[O intervalo] `range(1, 13)` gera os valores **1 a 12** (o 13 fica de
 fora). É ele que define **quantas voltas** o laço dará.
 
 .ref[`range(inicio, fim)` gera os inteiros de `inicio` até `fim - 1` (DOWNEY, 2016).]
@@ -423,7 +437,7 @@ for mes in range(1, 13):      # <-- 'mes' recebe cada valor, um por volta  #<<
     print(f"Mes {mes}: R$ {total:.2f}")
 ```
 
-.passo[A variável de controle] — a cada volta, `mes` recebe **o próximo valor**
+.passo[A variável de controle] a cada volta, `mes` recebe **o próximo valor**
 do intervalo. O avanço é **automático**: em Python não existe `mes++`.
 
 .ref[A variável do `for` assume, a cada iteração, o próximo elemento da sequência (DOWNEY, 2016).]
@@ -441,7 +455,7 @@ for mes in range(1, 13):
     print(f"Mes {mes}: R$ {total:.2f}")    # <-- mostra o acumulado #<<
 ```
 
-.passo[O corpo] — o bloco **indentado**; o trabalho repetido a cada volta:
+.passo[O corpo], o bloco **indentado**; o trabalho repetido a cada volta:
 acumula a economia do mês e mostra o total. A **indentação** define o que
 pertence ao laço.
 
@@ -476,24 +490,6 @@ Não há teste de condição nem incremento manual: o `for` percorre a coleção
 ]
 
 ---
-class: inverse, middle, center
-.header[ &nbsp; &nbsp; &nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &nbsp; &nbsp; &nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
-
-# <i class="fas fa-chalkboard-teacher"></i> Ao quadro
-
-## *Vamos desenhar o fluxo do laço à mão.*
-
-.pull-left[
-Comparando lado a lado:
-
-- **`for`** — percorre um intervalo (contagem embutida)
-- **`while`** — testa **antes** de cada volta
-- **`while True` + `break`** — testa **no fim** (roda ≥ 1 vez)
-]
-
-
-
----
 .header[ &nbsp; &nbsp; &nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &nbsp; &nbsp; &nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 ## O `while` — repetição condicionada
@@ -510,7 +506,7 @@ while total < meta:           # testa ANTES de cada volta  #<<
     print(f"Mes {meses}: R$ {total:.2f}")
 ```
 
-.passo[Condição no topo] — se ela já estiver satisfeita, o corpo **pode não
+.passo[Condição no topo] se ela já estiver satisfeita, o corpo **pode não
 executar nenhuma vez**.
 
 .ref[No `while`, a condição é avaliada antes do corpo; o laço pode executar zero vez (DOWNEY, 2016).]
@@ -535,7 +531,7 @@ while True:                   # repete indefinidamente...
 ```
 
 .passo[Corpo primeiro], depois o .passo[teste com `break`]: o corpo roda **pelo
-menos uma vez** — o equivalente ao `do-while` de outras linguagens.
+menos uma vez** o equivalente ao `do-while` de outras linguagens.
 
 .ref[O laço `while True:` com `break` no fim garante ao menos uma execução do corpo (DOWNEY, 2016).]
 
@@ -556,7 +552,7 @@ menos uma vez** — o equivalente ao `do-while` de outras linguagens.
 <br>
 
 .destaque[
-Precisa rodar **ao menos uma vez**? Use `while True:` com `break` no fim — o
+Precisa rodar **ao menos uma vez**? Use `while True:` com `break` no fim o
 equivalente idiomático ao `do-while`, que Python não possui.
 ]
 
@@ -575,12 +571,11 @@ class: inverse, middle, center
 
 `exemplo_while.py` — versão condicionada
 
-`exemplo_erro_proposital.py` — **erro proposital**
-]
+
 
 .pull-right[
 .destaque[
-Vamos rodar, ler a saída juntos e **corrigir o bug ao vivo**.
+Vamos rodar, ler a saída juntos.
 ]
 ]
 
@@ -616,13 +611,13 @@ class: inverse, top
 
 <br>
 
-<i class="fas fa-check-circle"></i> Por que usar laços de repetição — o simulador de poupança
+<i class="fas fa-check-circle"></i> Por que usar laços de repetição, o simulador de poupança
 
 <i class="fas fa-check-circle"></i> O `for` e o `range`: percorrer um intervalo de valores
 
 <i class="fas fa-check-circle"></i> O `while` (condicionada) e o padrão `while True` + `break` (ao menos uma vez)
 
-<i class="fas fa-check-circle"></i> Contada × condicionada — quem decide a parada
+<i class="fas fa-check-circle"></i> Contada (for) × condicionada (while), quem decide a parada
 
 <i class="fas fa-check-circle"></i> Depuração ao vivo de um laço infinito
 
