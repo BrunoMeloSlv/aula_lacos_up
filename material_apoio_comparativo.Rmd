@@ -1,5 +1,5 @@
 ---
-title: "Material de Apoio --- Laços de Repetição em C, Python e R"
+title: "Material de Apoio --- Laços de Repetição em Python (com C e R como contraponto)"
 author: "Prof. Bruno Melo · Universidade Positivo --- Processo Seletivo Docente"
 date: "Conteúdo complementar (fora dos 20 min) · guia de consulta"
 output:
@@ -32,7 +32,7 @@ header-includes:
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \fancyhf{}
-  - \fancyhead[L]{\small\color{upescuro}\textbf{Material de Apoio} · Laços de Repetição · UP}
+  - \fancyhead[L]{\small\color{upescuro}\textbf{Material de Apoio} · Laços de Repetição em Python · UP}
   - \fancyhead[R]{\small\thepage}
   - \renewcommand{\headrulewidth}{0.4pt}
   - \usepackage[most]{tcolorbox}
@@ -46,28 +46,56 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
 \begin{ouro}
-\textbf{A ideia central:} a estrutura lógica de um laço --- inicializar, testar, executar, atualizar --- é \textbf{a mesma} em C, Python e R. Muda a \emph{sintaxe} e o que cada comunidade considera idiomático. Compreender o conceito em C facilita a transferência para as outras linguagens.
+\textbf{A ideia central:} a estrutura lógica de um laço --- iniciar, testar/percorrer, executar, atualizar --- é \textbf{a mesma} em Python, C e R. Muda a \emph{sintaxe} e o que cada comunidade considera idiomático. Aqui, \textbf{Python está em foco}; C e R aparecem apenas como contraponto.
 \end{ouro}
 
 # O que é uma estrutura de repetição
 
 Uma **estrutura de repetição** (laço, *loop*) executa um bloco de comandos várias
-vezes enquanto uma condição se mantém verdadeira ou enquanto um contador percorre
-um intervalo (DEITEL; DEITEL, 2011). Distinguimos dois casos:
+vezes enquanto uma condição se mantém verdadeira ou enquanto se percorre uma
+sequência de valores (DOWNEY, 2016). Distinguimos dois casos:
 
-- **Repetição contada** --- o número de iterações é **conhecido** de antemão (naturalmente expressa por `for`).
-- **Repetição condicionada** --- o número de iterações **depende de uma condição** avaliada em tempo de execução (naturalmente expressa por `while`/`do-while`) (ASCENCIO; CAMPOS, 2012).
+- **Repetição contada** --- o número de iterações é **conhecido** de antemão (em Python, um `for` sobre um `range`).
+- **Repetição condicionada** --- o número de iterações **depende de uma condição** avaliada em tempo de execução (em Python, um `while`) (ASCENCIO; CAMPOS, 2012).
 
-Todo laço tem quatro elementos: **inicialização**, **condição de parada**,
+Todo laço tem, em essência, quatro elementos: **início**, **condição/percurso**,
 **corpo** e **atualização** da variável de controle. A omissão da atualização da
-variável testada é a causa clássica do **laço infinito** (DEITEL; DEITEL, 2011).
+variável testada é a causa clássica do **laço infinito** (DOWNEY, 2016).
 
 # O exemplo condutor: simulador de poupança
 
 **Problema:** o usuário guarda um valor fixo por mês. Quantos meses até atingir
 uma meta (ex.: comprar um notebook)? E quanto terá em exatamente 12 meses?
 
-## Em C (KERNIGHAN; RITCHIE, 1989)
+## Em Python (DOWNEY, 2016) --- linguagem principal
+
+```python
+# Contada: percorre um intervalo de 12 meses (o for idiomatico em Python)
+total = 0.0
+for mes in range(1, 13):          # 1, 2, ..., 12 (o 13 fica de fora)
+    total += mensal
+    print(f"Mes {mes}: R$ {total:.2f}")
+
+# Condicionada: repete ate a meta
+total, meses = 0.0, 0
+while total < meta:
+    total += mensal
+    meses += 1
+
+# "Ao menos uma vez" (Python nao tem do-while): while True + break
+total, meses = 0.0, 0
+while True:
+    total += mensal
+    meses += 1
+    if total >= meta:
+        break
+```
+
+\begin{destaque}
+Em Python, o \texttt{for} percorre os elementos de uma sequência (aqui, \texttt{range}) e não um contador manual: iterar sobre coleções é o estilo idiomático (DOWNEY, 2016). Não existe \texttt{do-while}; o padrão equivalente é \texttt{while True:} com \texttt{break} no fim.
+\end{destaque}
+
+## Em C (KERNIGHAN; RITCHIE, 1989) --- contraponto
 
 ```c
 /* Contada: 12 meses fixos */
@@ -79,33 +107,13 @@ for (int mes = 1; mes <= 12; mes++) {
 
 /* Condicionada: ate a meta */
 float t = 0.0f; int meses = 0;
-while (t < meta) {
-    t += mensal;
-    meses++;
-}
+while (t < meta) { t += mensal; meses++; }
+
+/* "Ao menos uma vez": do-while (existe em C) */
+do { t += mensal; meses++; } while (t < meta);
 ```
 
-## Em Python (DOWNEY, 2016)
-
-```python
-# Contada: iterar sobre um intervalo (idiomatico em Python)
-total = 0.0
-for mes in range(1, 13):          # 1..12
-    total += mensal
-    print(f"Mes {mes}: R$ {total:.2f}")
-
-# Condicionada
-t, meses = 0.0, 0
-while t < meta:
-    t += mensal
-    meses += 1
-```
-
-\begin{destaque}
-Em Python, o \texttt{for} percorre os elementos de uma sequência (aqui, \texttt{range}) e não um contador manual: iterar sobre coleções é o estilo idiomático (DOWNEY, 2016). Não existe \texttt{do-while}; emula-se com \texttt{while True:} + \texttt{break}.
-\end{destaque}
-
-## Em R (WICKHAM; GROLEMUND, 2017)
+## Em R (WICKHAM; GROLEMUND, 2017) --- contraponto
 
 ```r
 # Contada
@@ -117,10 +125,7 @@ for (mes in 1:12) {
 
 # Condicionada
 t <- 0; meses <- 0
-while (t < meta) {
-  t <- t + mensal
-  meses <- meses + 1
-}
+while (t < meta) { t <- t + mensal; meses <- meses + 1 }
 
 # Estilo idiomatico em R: vetorizacao (evita o laco explicito)
 total_12 <- sum(rep(mensal, 12))
@@ -132,47 +137,45 @@ Em R, laços explícitos funcionam, mas o estilo idiomático prefere \textbf{vet
 
 # Quadro comparativo
 
-| Aspecto | C | Python | R |
+| Aspecto | Python | C | R |
 |---|---|---|---|
-| `for` contado | `for(int m=1;m<=12;m++)` | `for m in range(1,13):` | `for (m in 1:12)` |
-| `while` | `while(cond){}` | `while cond:` | `while (cond) {}` |
-| `do-while` | `do{}while(cond);` | não existe | não existe |
-| Bloco | chaves `{ }` | indentação após `:` | chaves `{ }` |
-| Controle | tipada, declarada | nome dinâmico | nome dinâmico |
-| Idiomático | contador explícito | iterar coleções | vetorização / `map` |
+| `for` contado | `for m in range(1,13):` | `for(int m=1;m<=12;m++)` | `for (m in 1:12)` |
+| `while` | `while cond:` | `while(cond){}` | `while (cond) {}` |
+| "ao menos 1 vez" | `while True:` + `break` | `do{}while(cond);` | `repeat{}` + `break` |
+| Bloco | indentação após `:` | chaves `{ }` | chaves `{ }` |
+| Controle | nome dinâmico | tipada, declarada | nome dinâmico |
+| Idiomático | iterar coleções | contador explícito | vetorização / `map` |
 
-**Conclusão didática:** a estrutura lógica (inicializar, testar, executar,
+**Conclusão didática:** a estrutura lógica (iniciar, testar/percorrer, executar,
 atualizar) é a mesma nas três linguagens; muda a sintaxe e o que cada comunidade
-considera idiomático.
+considera idiomático. Dominar o conceito em Python facilita a leitura de C e R.
 
 # Erros comuns (para a depuração ao vivo)
 
-1. **Laço infinito** --- a variável testada na condição não é atualizada no corpo. *Ex.:* esquecer `total += mensal;` no `while`; `total` fica 0 e a condição nunca fica falsa (DEITEL; DEITEL, 2011).
-2. **Off-by-one** --- erro de contagem por um: usar `mes < 12` quando se quer 12 iterações (executa 11), ou iniciar o contador em 0 quando se esperava 1.
-3. **Ponto-e-vírgula indevido** --- `for (...);` com `;` logo após o cabeçalho cria um corpo vazio (armadilha sintática em C).
+1. **Laço infinito** --- a variável testada no `while` não é atualizada no corpo. *Ex.:* esquecer `total += mensal`; `total` fica 0 e a condição nunca fica falsa (DOWNEY, 2016).
+2. **Off-by-one** --- erro de contagem por um: usar `range(1, 12)` quando se quer 12 iterações gera só 11, porque `range` **exclui o fim**.
+3. **Sintaxe do bloco** --- esquecer os dois-pontos `:` no cabeçalho do laço, ou misturar espaços e tabs, provocando `IndentationError` (armadilha típica de Python).
 
 # Pergunta de verificação de aprendizagem
 
 \begin{pergunta}
-\textbf{No simulador de poupança, quero garantir que o menu apareça pelo menos uma vez e só depois perguntar se o usuário deseja continuar. Qual das três estruturas --- \texttt{for}, \texttt{while} ou \texttt{do-while} --- é a mais adequada, e por quê?}
+\textbf{No simulador de poupança, quero garantir que o menu apareça pelo menos uma vez e só depois perguntar se o usuário deseja continuar. Como fazer isso em Python --- e por que o \texttt{while} comum, sozinho, não é a forma mais direta?}
 \end{pergunta}
 
-**Resposta esperada:** `do-while`. Como a condição é avaliada **ao final** do
-laço, o corpo (o menu) executa **pelo menos uma vez** antes da primeira
-verificação --- comportamento exigido pelo requisito (DEITEL; DEITEL, 2011).
+**Resposta esperada:** usar `while True:` com um `break` **no fim** do corpo.
+Assim o corpo (o menu) executa **pelo menos uma vez** antes do primeiro teste ---
+o padrão idiomático que substitui o `do-while`, inexistente em Python (DOWNEY,
+2016).
 
-*Questão-desafio (opcional para a banca):* "Como obter esse comportamento em
-Python, que não possui `do-while`?" Resposta: `while True:` com um `break`
-condicional ao final (DOWNEY, 2016).
+*Questão-desafio (opcional para a banca):* "Em C, qual estrutura resolveria isso
+diretamente?" Resposta: o `do-while`, que testa a condição ao final
+(KERNIGHAN; RITCHIE, 1989).
 
 # Referências
 
 ASCENCIO, A. F. G.; CAMPOS, E. A. V. **Fundamentos da programação de
 computadores**: algoritmos, Pascal, C/C++ (padrão ANSI) e Java. 3. ed. São
 Paulo: Pearson, 2012.
-
-DEITEL, P.; DEITEL, H. **C: como programar**. 6. ed. São Paulo: Pearson Prentice
-Hall, 2011.
 
 DOWNEY, A. B. **Pense em Python**: pense como um cientista da computação. 2. ed.
 São Paulo: Novatec, 2016.

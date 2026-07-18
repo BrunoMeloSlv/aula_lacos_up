@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Laços de Repetição em C</title>
+    <title>Laços de Repetição em Python</title>
     <meta charset="utf-8" />
     <script src="aula_lacos_repeticao_files/header-attrs-2.31/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
@@ -11,10 +11,10 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Laços de Repetição em C
+# Laços de Repetição em Python
 ]
 .subtitle[
-## for · while · do-while
+## for · while
 ]
 .institute[
 ### Prof. Bruno Melo — Universidade Positivo
@@ -117,9 +117,9 @@ hr { border: none; border-top: 2px solid #074073; margin: 0.5em 0; }
 &lt;img class="title-logo" src="up_logo.png" alt="Universidade Positivo"/&gt;
 
 .center[
-# Laços de Repetição em C
+# Laços de Repetição em Python
 
-### `for` &amp;nbsp;·&amp;nbsp; `while` &amp;nbsp;·&amp;nbsp; `do-while`
+### `for` &amp;nbsp;·&amp;nbsp; `while`
 
 **Prof. Bruno Melo** &amp;nbsp;·&amp;nbsp; Universidade Positivo &amp;nbsp;·&amp;nbsp; Processo Seletivo Docente
 ]
@@ -156,15 +156,13 @@ hr { border: none; border-top: 2px solid #074073; margin: 0.5em 0; }
   &lt;line x1="360" y1="126" x2="480" y2="126" stroke="#074073" stroke-width="5" marker-end="url(#seta)"/&gt;
   &lt;text x="420" y="150" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="13" fill="#074073"&gt;deixe o laço repetir&lt;/text&gt;
 
-  &lt;!-- ===== Painel direito: automático ===== --&gt;
+  &lt;!-- ===== Painel direito: automático (código Python) ===== --&gt;
   &lt;text x="688" y="30" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="13" font-weight="700" letter-spacing="1.5" fill="#074073"&gt;AUTOMÁTICO&lt;/text&gt;
 
   &lt;rect x="512" y="46" width="336" height="150" rx="12" fill="#F4F6FA" stroke="#074073" stroke-width="2.5"/&gt;
-  &lt;text x="532" y="80"  font-family="'Fira Mono', monospace" font-size="15" fill="#050A59"&gt;for (int mes = 1;&lt;/text&gt;
-  &lt;text x="532" y="102" font-family="'Fira Mono', monospace" font-size="15" fill="#050A59"&gt;     mes &amp;lt;= 12;&lt;/text&gt;
-  &lt;text x="532" y="124" font-family="'Fira Mono', monospace" font-size="15" fill="#050A59"&gt;     mes++) {&lt;/text&gt;
-  &lt;text x="550" y="146" font-family="'Fira Mono', monospace" font-size="15" fill="#074073"&gt;total += 300;&lt;/text&gt;
-  &lt;text x="532" y="168" font-family="'Fira Mono', monospace" font-size="15" fill="#050A59"&gt;}&lt;/text&gt;
+  &lt;text x="532" y="98"  font-family="'Fira Mono', monospace" font-size="16" fill="#050A59"&gt;for mes in range(1, 13):&lt;/text&gt;
+  &lt;text x="560" y="126" font-family="'Fira Mono', monospace" font-size="16" fill="#074073"&gt;total += 300&lt;/text&gt;
+  &lt;text x="560" y="154" font-family="'Fira Mono', monospace" font-size="16" fill="#050A59"&gt;print(total)&lt;/text&gt;
 
   &lt;g&gt;
     &lt;path d="M 828,58 A 15,15 0 1 1 815,84" fill="none" stroke="#2E608C" stroke-width="3.2" stroke-linecap="round"/&gt;
@@ -181,7 +179,7 @@ hr { border: none; border-top: 2px solid #074073; margin: 0.5em 0; }
 &lt;/p&gt;
 
 ---
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 ## Roteiro da aula
 
@@ -190,30 +188,30 @@ hr { border: none; border-top: 2px solid #074073; margin: 0.5em 0; }
 
 1. **Por que repetir?**
 
-2. **Lógica antes da sintaxe** 
+2. **Lógica antes da sintaxe**
 
-3. **O `for` passo a passo** 
+3. **O `for` passo a passo**
 
-4. .azulmedio[**Quadro**] — desenhar o fluxo 
+4. .azulmedio[**Quadro**] — desenhar o fluxo
 
 
 &lt;br&gt;
 
 .destaque[
-Imagine um simulador de poupança, *quanto tempo você precisa até juntar
-dinheiro para comprar um notebook?* 
+Imagine um simulador de poupança: *quanto tempo você precisa até juntar
+dinheiro para comprar um notebook?*
 ]
 
 ---
 class: inverse, middle, center
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 # 1. Por que repetir?
 
 ## *Quantas vezes você já fez a mesma coisa, repetindo à mão?*
 
 ---
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 ## Por que repetir?
 
@@ -238,18 +236,18 @@ O computador foi feito para isso: **repetir tarefas** com rapidez e sem errar.
 A estrutura que expressa "repita" chama-se **laço de repetição** (ou *loop*).
 ]
 
-.ref[Estruturas de repetição executam um bloco de comandos várias vezes enquanto uma condição se mantém (DEITEL; DEITEL, 2011; ASCENCIO; CAMPOS, 2012).]
+.ref[Estruturas de repetição executam um bloco de comandos várias vezes enquanto uma condição se mantém (DOWNEY, 2016; ASCENCIO; CAMPOS, 2012).]
 
 ---
 class: inverse, middle, center
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 # 2. Lógica antes da sintaxe
 
-## *Primeiro pensamos o problema. Depois traduzimos para C, Python, R...*
+## *Primeiro pensamos o problema. Depois traduzimos para Python.*
 
 ---
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 ## O simulador de poupança
 
@@ -285,7 +283,7 @@ Essa é a repetição **condicionada**.
 .ref[O pseudocódigo antecede a implementação e explicita a lógica do algoritmo (ASCENCIO; CAMPOS, 2012).]
 
 ---
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 ## Duas perguntas, dois laços
 
@@ -294,172 +292,168 @@ Essa é a repetição **condicionada**.
 | Pergunta do problema | O que controla | Laço natural |
 |---|---|---|
 | "Quantos meses até **atingir a meta**?" | uma **condição** | `while` |
-| "Quanto terei em **exatamente 12 meses**?" | um **contador** | `for` |
+| "Quanto terei em **exatamente 12 meses**?" | um **intervalo** | `for` |
 
 &lt;br&gt;
 
 --
 
 .destaque[
-Mesmo problema, mesma lógica de acúmulo, **muda apenas o que controla o sistema**.
+Mesmo problema, mesma lógica de acúmulo, **muda apenas o que controla a parada**.
 Vamos primeiro traduzir a versão **contada** (12 meses) para o `for`.
 ]
 
-.ref[A escolha da estrutura depende de a repetição ser controlada por contador ou por condição (DEITEL; DEITEL, 2011).]
+.ref[A escolha da estrutura depende de a repetição ser controlada por um intervalo conhecido ou por uma condição (DOWNEY, 2016).]
 
 ---
 class: inverse, middle, center
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 # 3. O laço `for` passo a passo
 
-## *Vamos montar o `for` (uma peça de cada vez).*
-
+## *Em Python, o `for` percorre um intervalo de valores.*
 
 ---
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+
+## A intuição do `for` — 12 meses, um a um
+
+&lt;div style="text-align:center; margin-top: 6px;"&gt;
+&lt;svg viewBox="0 0 900 240" style="width:90%; max-width:840px; height:auto;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="range de 1 a 13 gera doze valores, um para cada mes; o treze fica de fora."&gt;
+  &lt;defs&gt;
+    &lt;marker id="seta2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"&gt;
+      &lt;polygon points="0 0, 9 4.5, 0 9" fill="#074073"/&gt;
+    &lt;/marker&gt;
+  &lt;/defs&gt;
+
+  &lt;text x="450" y="34" text-anchor="middle" font-family="'Fira Mono', monospace" font-size="20" font-weight="700" fill="#050A59"&gt;for mes in range(1, 13):&lt;/text&gt;
+
+  &lt;circle cx="60"  cy="115" r="22" fill="#F4F6FA" stroke="#074073" stroke-width="2.5"/&gt;&lt;text x="60"  y="121" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="17" font-weight="600" fill="#050A59"&gt;1&lt;/text&gt;
+  &lt;circle cx="130" cy="115" r="22" fill="#F4F6FA" stroke="#074073" stroke-width="2.5"/&gt;&lt;text x="130" y="121" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="17" font-weight="600" fill="#050A59"&gt;2&lt;/text&gt;
+  &lt;circle cx="200" cy="115" r="22" fill="#F4F6FA" stroke="#074073" stroke-width="2.5"/&gt;&lt;text x="200" y="121" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="17" font-weight="600" fill="#050A59"&gt;3&lt;/text&gt;
+  &lt;circle cx="270" cy="115" r="22" fill="#F4F6FA" stroke="#074073" stroke-width="2.5"/&gt;&lt;text x="270" y="121" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="17" font-weight="600" fill="#050A59"&gt;4&lt;/text&gt;
+  &lt;circle cx="340" cy="115" r="22" fill="#F4F6FA" stroke="#074073" stroke-width="2.5"/&gt;&lt;text x="340" y="121" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="17" font-weight="600" fill="#050A59"&gt;5&lt;/text&gt;
+  &lt;circle cx="410" cy="115" r="22" fill="#F4F6FA" stroke="#074073" stroke-width="2.5"/&gt;&lt;text x="410" y="121" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="17" font-weight="600" fill="#050A59"&gt;6&lt;/text&gt;
+  &lt;circle cx="480" cy="115" r="22" fill="#F4F6FA" stroke="#074073" stroke-width="2.5"/&gt;&lt;text x="480" y="121" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="17" font-weight="600" fill="#050A59"&gt;7&lt;/text&gt;
+  &lt;circle cx="550" cy="115" r="22" fill="#F4F6FA" stroke="#074073" stroke-width="2.5"/&gt;&lt;text x="550" y="121" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="17" font-weight="600" fill="#050A59"&gt;8&lt;/text&gt;
+  &lt;circle cx="620" cy="115" r="22" fill="#F4F6FA" stroke="#074073" stroke-width="2.5"/&gt;&lt;text x="620" y="121" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="17" font-weight="600" fill="#050A59"&gt;9&lt;/text&gt;
+  &lt;circle cx="690" cy="115" r="22" fill="#F4F6FA" stroke="#074073" stroke-width="2.5"/&gt;&lt;text x="690" y="121" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="16" font-weight="600" fill="#050A59"&gt;10&lt;/text&gt;
+  &lt;circle cx="760" cy="115" r="22" fill="#F4F6FA" stroke="#074073" stroke-width="2.5"/&gt;&lt;text x="760" y="121" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="16" font-weight="600" fill="#050A59"&gt;11&lt;/text&gt;
+  &lt;circle cx="830" cy="115" r="22" fill="#050A59" stroke="#050A59" stroke-width="2.5"/&gt;&lt;text x="830" y="121" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="16" font-weight="600" fill="#F2F2F2"&gt;12&lt;/text&gt;
+
+  &lt;line x1="48" y1="170" x2="842" y2="170" stroke="#074073" stroke-width="3" marker-end="url(#seta2)"/&gt;
+  &lt;text x="445" y="196" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="15" font-weight="600" fill="#074073"&gt;12 repetições — uma para cada mês&lt;/text&gt;
+  &lt;text x="445" y="222" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="13" fill="#032059"&gt;o 13 fica de fora: por isso range(1, 13), e não range(1, 12)&lt;/text&gt;
+&lt;/svg&gt;
+&lt;/div&gt;
+
+.ref[Em Python, o `for` itera sobre os elementos de uma sequência, como um `range` (DOWNEY, 2016).]
+
+---
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+
+## Anatomia do `for` — visão geral
+
+```python
+total = 0.0
+
+for mes in range(1, 13):      # percorre os meses 1 a 12
+    total += 300.00           # corpo: acumula a economia
+    print(f"Mes {mes}: R$ {total:.2f}")
+```
+
+O `for` percorre um **intervalo**: a cada volta, `mes` recebe o próximo valor de
+`range(1, 13)` e o **corpo indentado** é executado. Nos próximos slides, cada
+parte é destacada em sequência.
+
+.ref[A forma geral do `for` em Python é `for` variável `in` sequência (DOWNEY, 2016).]
+
+---
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+
+## O `for` — o intervalo
+
+```python
+total = 0.0
+
+for mes in range(1, 13):      # &lt;-- range define QUANTAS voltas  #&lt;&lt;
+    total += 300.00
+    print(f"Mes {mes}: R$ {total:.2f}")
+```
+
+.passo[O intervalo] — `range(1, 13)` gera os valores **1 a 12** (o 13 fica de
+fora). É ele que define **quantas voltas** o laço dará.
+
+.ref[`range(inicio, fim)` gera os inteiros de `inicio` até `fim - 1` (DOWNEY, 2016).]
+
+---
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+
+## O `for` — a variável de controle
+
+```python
+total = 0.0
+
+for mes in range(1, 13):      # &lt;-- 'mes' recebe cada valor, um por volta  #&lt;&lt;
+    total += 300.00
+    print(f"Mes {mes}: R$ {total:.2f}")
+```
+
+.passo[A variável de controle] — a cada volta, `mes` recebe **o próximo valor**
+do intervalo. O avanço é **automático**: em Python não existe `mes++`.
+
+.ref[A variável do `for` assume, a cada iteração, o próximo elemento da sequência (DOWNEY, 2016).]
+
+---
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+
+## O `for` — o corpo
+
+```python
+total = 0.0
+
+for mes in range(1, 13):
+    total += 300.00                        # &lt;-- o trabalho do mes  #&lt;&lt;
+    print(f"Mes {mes}: R$ {total:.2f}")    # &lt;-- mostra o acumulado #&lt;&lt;
+```
+
+.passo[O corpo] — o bloco **indentado**; o trabalho repetido a cada volta:
+acumula a economia do mês e mostra o total. A **indentação** define o que
+pertence ao laço.
+
+.ref[Em Python, a indentação delimita o bloco de código do laço (DOWNEY, 2016).]
+
+---
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 ## O `for` — ordem de execução
 
 &lt;br&gt;
 
 $$
-\underbrace{\text{inicializa}}_{\text{uma vez}} \;\rightarrow\;
-\boxed{\;\text{testa} \;\rightarrow\; \text{corpo} \;\rightarrow\; \text{incrementa}\;} \;\rightarrow\; \text{testa novamente...}
+\text{range} \;\rightarrow\; \underbrace{mes \;\rightarrow\; \boxed{\text{corpo}}}_{\text{repete a cada valor}} \;\rightarrow\; \text{fim}
 $$
 
 &lt;br&gt;
 
 .pull-left[
-1. inicializa `mes = 1`
-2. testa `mes &lt;= 12`? &amp;nbsp;→ verdadeiro
-3. executa o corpo
-4. `mes++`
-5. volta a **testar**... até a condição ser **falsa**
+1. o `for` pega o **próximo valor** de `range(1, 13)`
+2. guarda em `mes`
+3. executa o **corpo** indentado
+4. volta e pega o **próximo valor**
+5. quando o intervalo **acaba**, o laço termina
 ]
 
 .pull-right[
 .destaque[
-O bloco **testa → corpo → incrementa** é o que se **repete**.
-A inicialização fica de fora: só acontece no início.
+Não há teste de condição nem incremento manual: o `for` percorre a coleção
+**do começo ao fim**, sozinho.
 ]
 ]
-
-
----
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
-
-## Anatomia do `for` — visão geral
-
-```c
-float total = 0.0f;
-
-for (int mes = 1;     // inicializacao
-     mes &lt;= 12;       // condicao
-     mes++)           // incremento
-{
-    total += 300.0f;                          // corpo
-    printf("Mes %d: R$ %.2f\n", mes, total);  // corpo
-}
-```
-
-O cabeçalho reúne, numa só linha, a .passo[inicialização], a .passo[condição] e o
-.passo[incremento] e o .passo[corpo] fica entre chaves. Nos próximos slides,
-cada parte é destacada em sequência.
-
-.ref[A forma geral do `for` reúne inicialização, teste e incremento no cabeçalho (KERNIGHAN; RITCHIE, 1989).]
-
----
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
-
-## O `for` — inicialização
-
-```c
-float total = 0.0f;
-
-for (int mes = 1;     // inicializacao  &lt;-- acontece UMA vez  #&lt;&lt;
-     mes &lt;= 12;       // condicao
-     mes++)           // incremento
-{
-    total += 300.0f;
-    printf("Mes %d: R$ %.2f\n", mes, total);
-}
-```
-
-.passo[Inicialização] — executa **uma única vez**, no começo. Aqui nasce o
-contador: `mes = 1`.
-
-.ref[A inicialização do contador ocorre uma só vez, antes da primeira avaliação da condição (KERNIGHAN; RITCHIE, 1989).]
-
----
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
-
-## O `for` — condição
-
-```c
-float total = 0.0f;
-
-for (int mes = 1;     // inicializacao
-     mes &lt;= 12;       // condicao  &lt;-- testada ANTES de cada volta  #&lt;&lt;
-     mes++)           // incremento
-{
-    total += 300.0f;
-    printf("Mes %d: R$ %.2f\n", mes, total);
-}
-```
-
-.passo[Condição] — testada **antes de cada repetição**. Se for **verdadeira**,
-entra no corpo; se **falsa**, o laço termina.
-
-.ref[O laço prossegue enquanto a expressão de teste for avaliada como verdadeira (DEITEL; DEITEL, 2011).]
-
----
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
-
-## O `for` — corpo
-
-```c
-float total = 0.0f;
-
-for (int mes = 1;     // inicializacao
-     mes &lt;= 12;       // condicao
-     mes++)           // incremento
-{
-    total += 300.0f;                          // &lt;-- o trabalho do mes  #&lt;&lt;
-    printf("Mes %d: R$ %.2f\n", mes, total);  // &lt;-- mostra o acumulado #&lt;&lt;
-}
-```
-
-.passo[Corpo] — o **trabalho útil** de cada volta: acumula a economia do mês e
-mostra o total acumulado.
-
-.ref[O corpo do laço concentra as instruções repetidas a cada iteração (ASCENCIO; CAMPOS, 2012).]
-
----
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
-
-## O `for` — incremento
-
-```c
-float total = 0.0f;
-
-for (int mes = 1;     // inicializacao
-     mes &lt;= 12;       // condicao
-     mes++)           // incremento  &lt;-- executa ao FIM de cada volta  #&lt;&lt;
-{
-    total += 300.0f;
-    printf("Mes %d: R$ %.2f\n", mes, total);
-}
-```
-
-.passo[Incremento] — roda **ao fim de cada volta** e faz o contador avançar
-(`mes++`). Sem ele, a condição **nunca muda** e o laço fica **infinito**.
-
-.ref[A ausência de atualização da variável de controle é causa clássica de laço infinito (DEITEL; DEITEL, 2011).]
 
 ---
 class: inverse, middle, center
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 # &lt;i class="fas fa-chalkboard-teacher"&gt;&lt;/i&gt; Ao quadro
 
@@ -468,95 +462,96 @@ class: inverse, middle, center
 .pull-left[
 Comparando lado a lado:
 
-- **`while`** — testa **antes**
-- **`for`** — testa antes, com contador embutido
-- **`do-while`** — testa **depois**
+- **`for`** — percorre um intervalo (contagem embutida)
+- **`while`** — testa **antes** de cada volta
+- **`while True` + `break`** — testa **no fim** (roda ≥ 1 vez)
 ]
 
 
 
 ---
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 ## O `while` — repetição condicionada
 
 O mesmo simulador, agora **sem saber o número de meses**:
 
-```c
-float total = 0.0f;
-int   meses = 0;
+```python
+total = 0.0
+meses = 0
 
-while (total &lt; meta) {          // testa ANTES de cada volta  #&lt;&lt;
-    total += mensal;            // corpo
-    meses++;                    // atualiza o controle
-    printf("Mes %d: R$ %.2f\n", meses, total);
-}
+while total &lt; meta:           # testa ANTES de cada volta  #&lt;&lt;
+    total += mensal           # corpo
+    meses += 1                # atualiza o controle
+    print(f"Mes {meses}: R$ {total:.2f}")
 ```
 
 .passo[Condição no topo] — se ela já estiver satisfeita, o corpo **pode não
 executar nenhuma vez**.
 
-.ref[No `while`, a condição é avaliada antes do corpo; o laço pode executar zero vez (KERNIGHAN; RITCHIE, 1989).]
+.ref[No `while`, a condição é avaliada antes do corpo; o laço pode executar zero vez (DOWNEY, 2016).]
 
 ---
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
-## O `do-while` — executa ao menos uma vez
+## Preciso rodar ao menos uma vez? `while True` + `break`
 
-```c
-float total = 0.0f;
-int   meses = 0;
+Python **não tem `do-while`**. O padrão idiomático é testar **no fim**:
 
-do {
-    total += mensal;            // corpo PRIMEIRO
-    meses++;
-    printf("Mes %d: R$ %.2f\n", meses, total);
-} while (total &lt; meta);         // ...e so DEPOIS testa  #&lt;&lt;
+```python
+total = 0.0
+meses = 0
+
+while True:                   # repete indefinidamente...
+    total += mensal           # corpo PRIMEIRO
+    meses += 1
+    print(f"Mes {meses}: R$ {total:.2f}")
+    if total &gt;= meta:         # ...e só DEPOIS testa a saída  #&lt;&lt;
+        break                 # sai do laço
 ```
 
-.passo[Corpo primeiro], depois a .passo[condição]: o corpo roda **pelo menos uma
-vez**, mesmo que a condição já seja falsa — ideal para um menu que precisa
-aparecer antes de perguntar "deseja continuar?".
+.passo[Corpo primeiro], depois o .passo[teste com `break`]: o corpo roda **pelo
+menos uma vez** — o equivalente ao `do-while` de outras linguagens.
 
-.ref[No `do-while` o teste ocorre ao final, garantindo ao menos uma execução do corpo (DEITEL; DEITEL, 2011).]
+.ref[O laço `while True:` com `break` no fim garante ao menos uma execução do corpo (DOWNEY, 2016).]
 
 ---
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
-## Os três lado a lado
+## Os dois laços lado a lado
 
 &lt;br&gt;
 
-| | `for` | `while` | `do-while` |
-|---|---|---|---|
-| **Quando usar** | nº de repetições **conhecido** | repetir por **condição** | condição, mas **≥ 1 vez** |
-| **Testa a condição** | antes | antes | **depois** |
-| **Corpo pode rodar 0 vez?** | sim | sim | **não** |
-| **No nosso exemplo** | "12 meses fixos" | "até a meta" | "roda e confere" |
+| | `for` | `while` |
+|---|---|---|
+| **Quando usar** | nº de repetições **conhecido** | repetir por **condição** |
+| **O que guia o laço** | um **intervalo** (`range`) | uma **condição** |
+| **Corpo pode rodar 0 vez?** | sim (`range` vazio) | sim |
+| **No nosso exemplo** | "12 meses fixos" | "até a meta" |
 
 &lt;br&gt;
 
 .destaque[
-**Repetição contada** (`for`) &amp;nbsp;×&amp;nbsp; **condicionada** (`while` / `do-while`).
-Mesmo acúmulo de poupança — muda **quem decide a parada**.
+Precisa rodar **ao menos uma vez**? Use `while True:` com `break` no fim — o
+equivalente idiomático ao `do-while`, que Python não possui.
 ]
 
-.ref[Comparação das três estruturas de repetição da linguagem C (DEITEL; DEITEL, 2011; ASCENCIO; CAMPOS, 2012).]
+.ref[Comparação das estruturas de repetição de Python (DOWNEY, 2016; ASCENCIO; CAMPOS, 2012).]
 
 ---
 class: inverse, middle, center
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
-# &lt;i class="fas fa-laptop-code"&gt;&lt;/i&gt; 6. VS Code ao vivo
+# &lt;i class="fas fa-laptop-code"&gt;&lt;/i&gt; 6. Vamos para o código 
 
-## *Agora o código sai do slide e roda de verdade.*
+
 
 .pull-left[
-`exemplo_for.c` — versão contada (12 meses)
+`exemplo_for.py` — versão contada (12 meses)
 
-`exemplo_while.c` — versão condicionada
+`exemplo_while.py` — versão condicionada
 
-`exemplo_erro_proposital.c` — **erro proposital**
+`exemplo_erro_proposital.py` — **erro proposital**
 ]
 
 .pull-right[
@@ -566,54 +561,30 @@ Vamos rodar, ler a saída juntos e **corrigir o bug ao vivo**.
 ]
 
 ---
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 ## Material de apoio — a mesma lógica em três linguagens
 
 .small[
-| | **C** | **Python** | **R** |
+| | **Python** | C | R |
 |---|---|---|---|
-| **contado** | `for(int m=1;m&lt;=12;m++)` | `for m in range(1,13):` | `for (m in 1:12) {` |
-| **condicionado** | `while (total &lt; meta)` | `while total &lt; meta:` | `while (total &lt; meta) {` |
-| **bloco** | `{ ... }` | indentação `:` | `{ ... }` |
-| **estilo idiomático** | índice explícito | iterar sobre coleções | vetorização / `purrr::map` |
+| **contado** | `for m in range(1,13):` | `for(int m=1;m&lt;=12;m++)` | `for (m in 1:12) {` |
+| **condicionado** | `while total &lt; meta:` | `while (total &lt; meta)` | `while (total &lt; meta) {` |
+| **≥ 1 vez** | `while True:` + `break` | `do { } while(...)` | `repeat { }` + `break` |
+| **bloco** | indentação `:` | chaves `{ }` | chaves `{ }` |
+| **idiomático** | iterar coleções | índice explícito | vetorização |
 ]
 
 .destaque[
-A **estrutura lógica é a mesma**; muda a **sintaxe** e o que é idiomático em cada
-linguagem. Em Python, itera-se sobre coleções; em R, prefere-se a **vetorização**.
+**Python em foco**; C e R entram como **contraponto**. A estrutura lógica é a
+mesma; muda a **sintaxe** e o que é idiomático em cada linguagem.
 ]
 
-.ref[DOWNEY (2016) para Python; WICKHAM; GROLEMUND (2017, cap. *Iteration*) para R; KERNIGHAN; RITCHIE (1989) para C. Material complementar — fora dos 20 min.]
-
----
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
-
-## 7. Verificação de aprendizagem
-
-&lt;br&gt;
-
-.pergunta[
-No simulador de poupança, quero garantir que o menu **apareça pelo menos uma
-vez** e só depois perguntar se o usuário deseja continuar. Qual das três
-estruturas é a mais adequada — `for`, `while` ou `do-while` — e por quê?
-]
-
-&lt;br&gt;
-
---
-
-.destaque[
-**Resposta esperada:** `do-while` — porque ele testa a condição **no fim**;
-assim o corpo (o menu) executa **pelo menos uma vez** antes da primeira
-verificação.
-]
-
-.ref[Avaliação formativa por questionamento dirigido ativa a participação e verifica a aprendizagem (MASETTO, 2012).]
+.ref[DOWNEY (2016) para Python; KERNIGHAN; RITCHIE (1989) para C; WICKHAM; GROLEMUND (2017, cap. *Iteration*) para R. Material complementar — fora dos 20 min.]
 
 ---
 class: inverse, top
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 &lt;br&gt;
 
@@ -623,16 +594,22 @@ class: inverse, top
 
 &lt;i class="fas fa-check-circle"&gt;&lt;/i&gt; Por que usar laços de repetição — o simulador de poupança
 
-&lt;i class="fas fa-check-circle"&gt;&lt;/i&gt; O `for` passo a passo: inicialização, condição, corpo e incremento
+&lt;i class="fas fa-check-circle"&gt;&lt;/i&gt; O `for` e o `range`: percorrer um intervalo de valores
 
-&lt;i class="fas fa-check-circle"&gt;&lt;/i&gt; O `while` (condicionada) e o `do-while` (ao menos uma vez)
+&lt;i class="fas fa-check-circle"&gt;&lt;/i&gt; O `while` (condicionada) e o padrão `while True` + `break` (ao menos uma vez)
 
 &lt;i class="fas fa-check-circle"&gt;&lt;/i&gt; Contada × condicionada — quem decide a parada
 
 &lt;i class="fas fa-check-circle"&gt;&lt;/i&gt; Depuração ao vivo de um laço infinito
 
---
+---
+class: inverse, top
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 &lt;br&gt;
 
 .center[
@@ -642,7 +619,7 @@ class: inverse, top
 ]
 
 ---
-.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM C ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
+.header[ &amp;nbsp; &amp;nbsp; &amp;nbsp; UNIVERSIDADE POSITIVO — LAÇOS DE REPETIÇÃO EM PYTHON ] .footer[ &amp;nbsp; &amp;nbsp; &amp;nbsp; Prof. Bruno Melo — Processo Seletivo Docente ]
 
 ## Referências (ABNT)
 
@@ -650,9 +627,6 @@ class: inverse, top
 ASCENCIO, A. F. G.; CAMPOS, E. A. V. **Fundamentos da programação de
 computadores**: algoritmos, Pascal, C/C++ (padrão ANSI) e Java. 3. ed. São
 Paulo: Pearson, 2012.
-
-DEITEL, P.; DEITEL, H. **C: como programar**. 6. ed. São Paulo: Pearson Prentice
-Hall, 2011.
 
 DOWNEY, A. B. **Pense em Python**: pense como um cientista da computação. 2. ed.
 São Paulo: Novatec, 2016.

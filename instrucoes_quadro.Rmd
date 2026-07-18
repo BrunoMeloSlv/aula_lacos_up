@@ -1,7 +1,7 @@
 ---
 title: "Instruções do Quadro --- O que desenhar à mão"
 author: "Prof. Bruno Melo · Universidade Positivo --- Processo Seletivo Docente"
-date: "Laços de Repetição em C · ponto de pausa planejado (~3 min)"
+date: "Laços de Repetição em Python · ponto de pausa planejado (~3 min)"
 output:
   pdf_document:
     toc: false
@@ -31,7 +31,7 @@ header-includes:
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \fancyhf{}
-  - \fancyhead[L]{\small\color{upescuro}\textbf{Instruções do Quadro} · Laços de Repetição em C · UP}
+  - \fancyhead[L]{\small\color{upescuro}\textbf{Instruções do Quadro} · Laços de Repetição em Python · UP}
   - \fancyhead[R]{\small\thepage}
   - \renewcommand{\headrulewidth}{0.4pt}
   - \usepackage[most]{tcolorbox}
@@ -44,7 +44,7 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
 \begin{destaque}
-\textbf{Momento:} logo após o slide 14 (ordem de execução do \texttt{for}). O slide 15 ("AO QUADRO") fica projetado enquanto você desenha. \textbf{Meta do desenho:} mostrar \emph{onde a condição é testada} em cada laço --- em cima (\texttt{while}/\texttt{for}) x embaixo (\texttt{do-while}) --- e a seta de retorno que caracteriza a repetição.
+\textbf{Momento:} logo após o slide 14 (ordem de execução do \texttt{for}). O slide 15 ("AO QUADRO") fica projetado enquanto você desenha. \textbf{Meta do desenho:} mostrar \emph{onde a condição é testada} --- o \texttt{while} testa \textbf{em cima}, o \texttt{while True} + \texttt{break} testa \textbf{embaixo} --- e como o \texttt{for} apenas \emph{percorre um intervalo}.
 \end{destaque}
 
 **Organização.** Divida o quadro em **3 colunas**, desenhando da esquerda para a
@@ -52,7 +52,7 @@ direita e falando enquanto desenha. Use **uma cor** para o fluxo e **outra** par
 circular as diferenças no fim. Convenções: **losango** = decisão (condição);
 **retângulo** = processo (corpo); **seta** = fluxo.
 
-# Coluna 1 --- `while` (condição em cima) ~60 s
+# Coluna 1 --- `while` (condição em cima) ~55 s
 
 ```text
           (inicio)
@@ -67,7 +67,7 @@ circular as diferenças no fim. Convenções: **losango** = decisão (condição
              v
      +------------------+
      |  total += mensal |
-     |  meses++         |
+     |  meses += 1      |
      |  mostrar total   |
      +------------------+
              |
@@ -80,19 +80,23 @@ circular as diferenças no fim. Convenções: **losango** = decisão (condição
 \textbf{Fala:} "O losango é o \emph{porteiro}: testa \textbf{antes} de entrar. Se verdadeiro, executa o corpo e \textbf{volta} para testar de novo. Quando fica falso, sai. A seta de retorno é o que faz repetir."
 \end{fala}
 
-# Coluna 2 --- `for` (mesmo fluxo, com contador) ~60 s
+# Coluna 2 --- `for` (percorre um intervalo) ~55 s
 
-Reaproveite o desenho da coluna 1 e **acrescente** os dois blocos do contador:
+O `for` de Python não testa uma condição escrita por você: ele **percorre os
+valores** de `range(1, 13)`, um a um, até acabarem.
 
 ```text
-     [ mes = 1 ]   <-- INICIALIZACAO (uma vez, ANTES do teste)
+     range(1, 13)   <-- os 12 valores a percorrer
              |
              v
-        /-----------\
-       <  mes <= 12?  >----( Falso )---->  ( fim )
-        \-----------/
+        /---------------\
+       < ha proximo valor? >---( nao )---->  ( fim )
+        \---------------/
              |
-         (Verdadeiro)
+          ( sim )
+             |
+             v
+     [ mes = proximo valor ]   <-- avanco AUTOMATICO
              |
              v
      +------------------+
@@ -100,20 +104,19 @@ Reaproveite o desenho da coluna 1 e **acrescente** os dois blocos do contador:
      |  mostrar total   |
      +------------------+
              |
-             v
-        [ mes++ ]     <-- INCREMENTO (ao FIM de cada volta)
-             |
-             +--------> (volta ao teste)
+             +--------> (volta a pegar o proximo)
 ```
 
 \begin{fala}
-\textbf{Fala:} "É o \textbf{mesmo fluxo} do while. O for só \emph{arruma as peças}: a inicializacao fica antes do teste, e o incremento, depois do corpo. Por isso o for é ideal quando o número de voltas é \textbf{conhecido}."
+\textbf{Fala:} "O for não tem um teste que você escreve: ele \textbf{percorre o intervalo} do começo ao fim. O avanço para o próximo valor é \textbf{automático} --- não existe \texttt{mes++}. Por isso o for é ideal quando o número de voltas é \textbf{conhecido}."
 \end{fala}
 
-**Gesto de ligação com o slide:** aponte para o losango e diga "isto é a **2**
-que acendeu no slide"; para `mes=1`, "a **1**"; para `mes++`, "a **4**".
+**Gesto de ligação com o slide:** aponte para `range(1, 13)` e diga "são os 12
+meses"; para `mes = proximo valor`, "a variável de controle recebe cada valor".
 
-# Coluna 3 --- `do-while` (condição embaixo) ~40 s
+# Coluna 3 --- `while True` + `break` (condição embaixo) ~40 s
+
+Python não tem `do-while`. Para rodar **ao menos uma vez**, testamos **no fim**:
 
 ```text
           (inicio)
@@ -121,30 +124,29 @@ que acendeu no slide"; para `mes=1`, "a **1**"; para `mes++`, "a **4**".
              v            <-- entra DIRETO no corpo
      +------------------+
      |  total += mensal |
-     |  meses++         |
+     |  meses += 1      |
      |  mostrar total   |
      +------------------+
              |
              v
-        /-----------\
-       <  total<meta? >---( Verdadeiro )--+
-        \-----------/                     |
-             |                            |
-          (Falso)      (volta ao corpo)---+
+        /-------------\
+       < total >= meta? >---( Sim )---> break ---> ( fim )
+        \-------------/
              |
-             v
-          ( fim )
+          ( Nao )
+             |
+             +--------> (volta ao corpo)
 ```
 
 \begin{fala}
-\textbf{Fala:} "Aqui o losango está \textbf{embaixo}. A seta de início cai \textbf{direto no corpo}, então ele executa \textbf{pelo menos uma vez}, mesmo que a condição já seja falsa. Perfeito para um \emph{menu} que precisa aparecer antes de perguntar 'deseja continuar?'."
+\textbf{Fala:} "Aqui o teste está \textbf{embaixo}. A seta de início cai \textbf{direto no corpo}, então ele executa \textbf{pelo menos uma vez}; a saída é o \texttt{break} quando a meta é atingida. É o substituto idiomático do do-while em Python. Perfeito para um \emph{menu} que precisa aparecer antes de perguntar 'deseja continuar?'."
 \end{fala}
 
 # Fechamento no quadro ~20 s
 
-- Circule/sublinhe: **losango EM CIMA** nas colunas 1 e 2; **losango EMBAIXO** na coluna 3.
-- Escreva ao lado: **`while`/`for` podem rodar 0 vez** · **`do-while` roda ao menos 1 vez**.
+- Circule/sublinhe: **teste EM CIMA** na coluna 1 (`while`); **teste EMBAIXO** na coluna 3 (`while True` + `break`).
+- Escreva ao lado: **`for`/`while` podem rodar 0 vez** · **`while True` + `break` roda ao menos 1 vez**.
 
 \begin{destaque}
-\textbf{Retomada da apresentação:} guarde o giz, vire-se para a banca e diga --- "Agora que vimos o fluxo no quadro, vamos ver essas três formas escritas em C." \textbf{Avance o slide} (15 para 16). O quadro-resumo do slide 18 espelha de propósito o que você acabou de desenhar --- use essa simetria como reforço (MASETTO, 2012).
+\textbf{Retomada da apresentação:} guarde o giz, vire-se para a banca e diga --- "Agora que vimos o fluxo no quadro, vamos ver essas formas escritas em Python." \textbf{Avance o slide} (15 para 16). O quadro-resumo do slide 18 espelha de propósito o que você acabou de desenhar --- use essa simetria como reforço (MASETTO, 2012).
 \end{destaque}

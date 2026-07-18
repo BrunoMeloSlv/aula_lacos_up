@@ -1,7 +1,7 @@
 ---
-title: "Plano de Aula --- Laços de Repetição em C"
+title: "Plano de Aula --- Laços de Repetição em Python"
 author: "Prof. Bruno Melo · Universidade Positivo --- Processo Seletivo Docente"
-date: "for, while e do-while · aula de ~20 minutos"
+date: "for e while (com o padrão while True + break) · aula de ~20 minutos"
 output:
   pdf_document:
     toc: true
@@ -32,7 +32,7 @@ header-includes:
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \fancyhf{}
-  - \fancyhead[L]{\small\color{upescuro}\textbf{Plano de Aula} · Laços de Repetição em C · UP}
+  - \fancyhead[L]{\small\color{upescuro}\textbf{Plano de Aula} · Laços de Repetição em Python · UP}
   - \fancyhead[R]{\small\thepage}
   - \renewcommand{\headrulewidth}{0.4pt}
   - \usepackage[most]{tcolorbox}
@@ -50,7 +50,7 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 | Instituição | Universidade Positivo |
 | Contexto | Processo Seletivo Docente --- aula de demonstração |
 | Componente | Introdução à Programação / Algoritmos e Lógica de Programação |
-| Tema | Estruturas de repetição em C: `for`, `while` e `do-while` |
+| Tema | Estruturas de repetição em Python: `for` e `while` |
 | Docente | Prof. Bruno Melo |
 | Duração | 20 minutos |
 | Público-alvo | Estudantes de 1º período (Computação / Engenharia) |
@@ -62,18 +62,18 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ## Objetivo geral
 
 Ao final da aula, o estudante deverá ser capaz de **compreender** e **aplicar** as
-estruturas de repetição `for`, `while` e `do-while` da linguagem C na resolução
-de problemas computacionais iterativos, **distinguindo** repetição contada de
+estruturas de repetição `for` e `while` da linguagem Python na resolução de
+problemas computacionais iterativos, **distinguindo** repetição contada de
 repetição condicionada.
 
 ## Objetivos específicos (verbos da Taxonomia de Bloom)
 
 O estudante será capaz de:
 
-1. **(Lembrar)** *Identificar* as quatro partes de um laço --- inicialização, condição, corpo e atualização --- em um código em C.
-2. **(Compreender)** *Descrever* o fluxo de execução de cada estrutura (`for`, `while`, `do-while`), explicando quando a condição é avaliada.
-3. **(Aplicar)** *Implementar* um simulador de poupança em C que acumula um valor mensal até atingir uma meta financeira.
-4. **(Analisar)** *Distinguir* repetição **contada** (`for`) de repetição **condicionada** (`while`/`do-while`), selecionando a estrutura adequada a cada problema.
+1. **(Lembrar)** *Identificar* as partes de um laço em Python --- o intervalo, a variável de controle e o corpo indentado no `for`; a condição, o corpo e a atualização no `while`.
+2. **(Compreender)** *Descrever* o fluxo de execução do `for` (percorre um intervalo) e do `while` (testa uma condição no início), explicando quando cada laço termina.
+3. **(Aplicar)** *Implementar* um simulador de poupança em Python que acumula um valor mensal até atingir uma meta financeira.
+4. **(Analisar)** *Distinguir* repetição **contada** (`for`) de repetição **condicionada** (`while`), selecionando a estrutura adequada a cada problema.
 5. **(Avaliar)** *Diagnosticar* e *corrigir* um laço infinito, justificando a causa (variável de controle não atualizada).
 
 \begin{destaque}
@@ -84,12 +84,12 @@ A formulação por níveis crescentes de complexidade cognitiva segue a progress
 
 1. Motivação: automação de tarefas repetitivas (simulador de poupança).
 2. Da lógica à sintaxe: pseudocódigo do processo iterativo.
-3. Estrutura `for`: anatomia (inicialização, condição, corpo, incremento) e ordem de execução.
+3. Estrutura `for`: percorrer um intervalo (`range`) --- intervalo, variável de controle e corpo indentado.
 4. Estrutura `while`: repetição condicionada, teste no início.
-5. Estrutura `do-while`: teste ao final, execução garantida ao menos uma vez.
-6. Comparação entre as três estruturas: repetição contada x condicionada.
+5. O padrão `while True:` + `break`: garantir a execução ao menos uma vez (equivalente idiomático ao `do-while`, inexistente em Python).
+6. Comparação entre `for` e `while`: repetição contada x condicionada.
 7. Erros comuns: laço infinito e *off-by-one*; depuração.
-8. (Complementar) Transferência do conceito para Python e R.
+8. (Complementar) Transferência do conceito para C e R.
 
 # Metodologia
 
@@ -98,9 +98,9 @@ concreto ao abstrato e da lógica à sintaxe, coerente com a mediação pedagóg
 ensino superior (MASETTO, 2012):
 
 1. **Exposição dialogada** --- abertura com gancho/analogia (juntar dinheiro para um objetivo) e perguntas dirigidas, conectando o conceito técnico a uma aplicação real.
-2. **Slide interativo (build incremental)** --- apresentação progressiva do `for`, com destaque visual de cada parte do laço conforme a narração, favorecendo a atenção seletiva e a construção passo a passo do modelo mental.
-3. **Quadro (representação gráfica manual)** --- desenho dos fluxogramas de `while`, `for` e `do-while` lado a lado, tornando visível **onde a condição é testada**; uso de múltiplas representações do mesmo conceito.
-4. **Live coding (demonstração ao vivo)** --- execução dos programas em C no VS Code, incluindo a **depuração de um laço infinito** proposital, modelando o processo de diagnóstico e correção de erros diante dos estudantes.
+2. **Slide interativo (build incremental)** --- apresentação progressiva do `for`, destacando cada parte do laço (intervalo, variável de controle, corpo) conforme a narração, favorecendo a construção passo a passo do modelo mental.
+3. **Quadro (representação gráfica manual)** --- desenho dos fluxos de `for` e `while` lado a lado, com uma nota sobre o padrão `while True:` + `break`, tornando visível **onde a condição é testada**.
+4. **Live coding (demonstração ao vivo)** --- execução dos programas em Python no VS Code, incluindo a **depuração de um laço infinito** proposital, modelando o processo de diagnóstico e correção de erros diante dos estudantes.
 
 **Fio condutor único:** o simulador de poupança percorre todas as etapas
 (pseudocódigo, slide, quadro e VS Code), garantindo coesão narrativa.
@@ -108,10 +108,10 @@ ensino superior (MASETTO, 2012):
 # Recursos didáticos
 
 - Projetor / tela para os slides (xaringan --- HTML).
-- Computador com **VS Code** e compilador **gcc** (MinGW) ou extensão C/C++.
+- Computador com **Python 3** e **VS Code** (extensão Python da Microsoft).
 - Quadro e marcador/giz em duas cores.
-- Arquivos da aula: slides `.Rmd`; três programas `.c` (`exemplo_for.c`, `exemplo_while.c`, `exemplo_erro_proposital.c`).
-- Material de apoio: quadro comparativo C/Python/R e referências.
+- Arquivos da aula: slides `.Rmd`; três programas `.py` (`exemplo_for.py`, `exemplo_while.py`, `exemplo_erro_proposital.py`).
+- Material de apoio: quadro comparativo Python/C/R e referências.
 
 # Avaliação
 
@@ -119,7 +119,6 @@ Avaliação **formativa**, ao longo da aula, por observação e questionamento
 dirigido (MASETTO, 2012):
 
 - **Durante o live coding:** pergunta diagnóstica --- *"o que falta dentro do laço para ele parar?"* --- verificando a compreensão da causa do laço infinito.
-- **Verificação final:** questão conceitual de seleção da estrutura adequada (`for`/`while`/`do-while`) para o requisito "executar ao menos uma vez", com justificativa. Resposta esperada: **`do-while`** (teste ao final).
 - **Indicadores de aprendizagem:** o estudante identifica as partes do laço, justifica a escolha da estrutura e explica a origem de um laço infinito.
 
 # Referências
@@ -127,9 +126,6 @@ dirigido (MASETTO, 2012):
 ASCENCIO, A. F. G.; CAMPOS, E. A. V. **Fundamentos da programação de
 computadores**: algoritmos, Pascal, C/C++ (padrão ANSI) e Java. 3. ed. São
 Paulo: Pearson, 2012.
-
-DEITEL, P.; DEITEL, H. **C: como programar**. 6. ed. São Paulo: Pearson Prentice
-Hall, 2011.
 
 DOWNEY, A. B. **Pense em Python**: pense como um cientista da computação. 2. ed.
 São Paulo: Novatec, 2016.
